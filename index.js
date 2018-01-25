@@ -195,8 +195,8 @@ function onSessionEnded(sessionEndedRequest, session) {
 function onLaunch(launchRequest, session, response) {
   logger.debug('onLaunch requestId=' + launchRequest.requestId + ', sessionId=' + session.sessionId);
 
-  response.speechText = 'Hi, I am a restaurant search skill. You can ask me for information about a restaurant. Which restaurant would you like to check?';
-  response.repromptText = 'For example, you can say tell me about James Street South.';
+  response.speechText = 'Welcome to the newest tourism board in Belfast. You can discover restaurants by asking me questions. For example, you can say, tell me an italian restaurant';
+  response.repromptText = 'For example, you can say, recommend me an asian restaurant.';
   response.shouldEndSession = false;
   response.done();
 }
@@ -218,7 +218,7 @@ intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
   //slots.CuisineItem
 
   if(slots.CuisineType === undefined) {
-    response.speechText = 'Looks like you forgot to mention a restaurant name. Which restaurant would you like to find information out about? ';
+    response.speechText = 'You forgot to say the type of cuisine you wish to go to. For example, you can say, recommend me a european restaurant. ';
     response.repromptText = 'For example, you can say, tell me about YuGo. ';
     response.shouldEndSession = false;
     response.done();
@@ -246,7 +246,7 @@ intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
 
     if(cuisineResults.length > MAX_RESPONSES) {
       response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say more information to hear about them.  `; 
-      response.cardContent += `There are more foods matched your search. You can say more information for more information. Or say stop to stop the skill. `; 
+      response.cardContent += `More restaurants matched your search. Please say more information to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
       response.repromptText = `You can say more information or stop.`; 
       session.attributes.resultLength = cuisineResults.length;
       session.attributes.CuisineType = slots.CuisineType;
@@ -297,8 +297,8 @@ intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
 
 
     if(restaurantResults.length > MAX_RESPONSES) {
-      response.speechText += `There are more '${slots.RestaurantItem}' restaurant results. Say more information to hear about them.  `; 
-      response.cardContent += `There are more foods matched your search. You can say more information for more information. Or say stop to stop the skill. `; 
+      response.speechText += `There are more restaurants called '${slots.RestaurantItem}'. Say more information to hear about them.  `; 
+      response.cardContent += `There are more restaurants called '${slots.RestaurantItem}'. You can say more information to discover another great restaurant. Or say stop if you are finished. `; 
       response.repromptText = `You can say more information or stop.`; 
       session.attributes.resultLength = restaurantResults.length;
       session.attributes.RestaurantItem = slots.RestaurantItem;
