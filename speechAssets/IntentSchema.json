@@ -1,0 +1,50 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "RestaurantItem",
+          "type": "RESTAURANT_ITEMS"
+        }
+      ],
+      "intent": "GetRestaurantInfo"
+    },
+    {
+      "slots": [
+        {
+          "name": "CuisineType",
+          "type": "CUISINE_TYPES"
+        }
+      ],
+      "intent": "GetRestaurantType"
+    },
+    {
+      "intent": "GetNextEventIntent"
+    },
+    {
+      "intent": "GetQuizIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Answer",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "QuizAnswerIntent"
+    },
+    {
+      "intent": "DontKnowIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
+

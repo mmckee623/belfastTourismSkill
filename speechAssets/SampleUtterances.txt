@@ -1,0 +1,17 @@
+GetRestaurantInfo tell me about {RestaurantItem}
+GetRestaurantInfo what is the location of {RestaurantItem}
+GetRestaurantInfo where is {RestaurantItem} located
+
+GetRestaurantType I would like to go to a {CuisineType} restaurant
+GetRestaurantType I want to go to {CuisineType} restaurant
+GetRestaurantType I want go to {CuisineType} tonight
+GetRestaurantType I want go to {CuisineType} today
+GetRestaurantType I want go to a {CuisineType} this evening
+GetRestaurantType Tell me a {CuisineType} restuarant
+GetRestaurantType Give me a {CuisineType} restaurant
+GetRestaurantType Suggest a {CuisineType} to go to
+GetRestaurantType Suggest a {CuisineType} restaurant to go to
+GetRestaurantType Recommend me an {CuisineType} restaurant
+
+GetNextEventIntent more information
+GetNextEventIntent more

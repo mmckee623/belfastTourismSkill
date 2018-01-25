@@ -1,0 +1,27 @@
+{
+  "session": {
+    "new": false,
+    "sessionId": "session1234",
+    "attributes": {},
+    "user": {
+      "userId": "usrid123"
+    },
+    "application": {
+      "applicationId": "amzn1.ask.skill.356e2abd-4717-4193-910d-9ee4ad6f7e8a"
+    }
+  },
+  "version": "1.0",
+  "request": {
+    "intent": {
+      "slots": {
+        "RestaurantItem": {
+          "name": "RestaurantItem",
+          "value": "ox"
+        }
+      },
+      "name": "GetRestaurantInfo"
+    },
+    "type": "IntentRequest",
+    "requestId": "request5678"
+  }
+}
