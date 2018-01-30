@@ -327,7 +327,7 @@ intentHandlers['GetNextEventIntent'] = function(request,session,response,slots) 
 
 
     session.attributes.cuisineResults.forEach(function(item) {
-      response.speechText += `Here are your other results. ${item[0]} is located at ${item[1]} and serves ${item[2]} food. Food dishes include, ${item[3]}. `; 
+      response.speechText += `Here are your other results. ${item[0]} is located at ${item[1]}. Food dishes include, ${item[3]}. `; 
       response.cardContent += `'${item[0]}'\n`;
     });
   } else {

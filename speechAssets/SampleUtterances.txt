@@ -3,15 +3,26 @@ GetRestaurantInfo what is the location of {RestaurantItem}
 GetRestaurantInfo where is {RestaurantItem} located
 
 GetRestaurantType I would like to go to a {CuisineType} restaurant
-GetRestaurantType I want to go to {CuisineType} restaurant
-GetRestaurantType I want go to {CuisineType} tonight
-GetRestaurantType I want go to {CuisineType} today
+GetRestaurantType I want to go to a {CuisineType} restaurant
+GetRestaurantType I want go to a {CuisineType} tonight
+GetRestaurantType I want go to a {CuisineType} today
 GetRestaurantType I want go to a {CuisineType} this evening
+GetRestaurantType I want to go to an {CuisineType} restaurant
+GetRestaurantType I want go to an {CuisineType} tonight
+GetRestaurantType I want go to an {CuisineType} today
+GetRestaurantType I want go to an {CuisineType} this evening
 GetRestaurantType Tell me a {CuisineType} restuarant
 GetRestaurantType Give me a {CuisineType} restaurant
 GetRestaurantType Suggest a {CuisineType} to go to
 GetRestaurantType Suggest a {CuisineType} restaurant to go to
+GetRestaurantType Recommend me a {CuisineType} restaurant
+GetRestaurantType Tell me an {CuisineType} restuarant
+GetRestaurantType Give me an {CuisineType} restaurant
+GetRestaurantType Suggest an {CuisineType} to go to
+GetRestaurantType Suggest an {CuisineType} restaurant to go to
 GetRestaurantType Recommend me an {CuisineType} restaurant
+GetRestaurantType Recommend an {CuisineType} restaurant
+GetRestaurantType Recommend a {CuisineType} restaurant
 
 GetNextEventIntent more information
 GetNextEventIntent more
