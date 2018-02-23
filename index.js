@@ -1,7 +1,9 @@
-// This is template files for developing Alexa skills
+//Build logic. Response formatting.
 
+// Strict Mode used within JS. Eg. the use of undeclared variables not allowed.
 'use strict';
 
+//Logger module used for debugging of the application.
 var winston = require('winston');
 
 var logger = new (winston.Logger)({
@@ -10,16 +12,17 @@ var logger = new (winston.Logger)({
     ]
   });
 
+//Used to hold all of the intents.
 var intentHandlers = {};
 
 if(process.env.NODE_DEBUG_EN) {
   logger.level = 'debug';
 }
 
-
+//Try & Ctch used here to catch any exceptions
 exports.handler = function (event, context) {
     try {
-
+			//Getting the APP ID and checking the APP ID Is valid
         logger.info('event.session.application.applicationId=' + event.session.application.applicationId);
 
         if (APP_ID !== '' && event.session.application.applicationId !== APP_ID) {
@@ -36,7 +39,8 @@ exports.handler = function (event, context) {
             onSessionStarted({requestId: event.request.requestId}, event.session);
         }
 
-
+			//On Launch this function is called. The speech text is spoken to the user. Text is outputted on device such as ipad. 
+			//Launch called other the intent request is called.
         if (event.request.type === 'LaunchRequest') {
             onLaunch(event.request, event.session, new Response(context,event.session));
         } else if (event.request.type === 'IntentRequest') {
@@ -67,6 +71,7 @@ function getSlots(req) {
   return slots;
 }
 
+// Handles the response. It deals with reqest, session starting and gathering a response by getSlots.
 var Response = function (context,session) {
   this.speechText = '';
   this.shouldEndSession = true;
@@ -102,6 +107,7 @@ var Response = function (context,session) {
 
 };
 
+//Functions which takes the text based upon ssml enabled.
 function createSpeechObject(text,ssmlEn) {
   if(ssmlEn) {
     return {
@@ -116,6 +122,7 @@ function createSpeechObject(text,ssmlEn) {
   }
 }
 
+// Outputs speeh and text
 function buildAlexaResponse(response) {
   var alexaResponse = {
     version: '1.0',
@@ -124,7 +131,7 @@ function buildAlexaResponse(response) {
       shouldEndSession: response.shouldEndSession
     }
   };
-
+	// re prompt if not anwered.
   if(response.repromptText) {
     alexaResponse.response.reprompt = {
       outputSpeech: createSpeechObject(response.repromptText,response.ssmlEn)
@@ -195,8 +202,8 @@ function onSessionEnded(sessionEndedRequest, session) {
 function onLaunch(launchRequest, session, response) {
   logger.debug('onLaunch requestId=' + launchRequest.requestId + ', sessionId=' + session.sessionId);
 
-  response.speechText = 'Welcome to the newest tourism board in Belfast. You can discover restaurants by asking me questions. For example, you can say, tell me an italian restaurant';
-  response.repromptText = 'For example, you can say, recommend me an asian restaurant.';
+  response.speechText = 'Welcome to the newest tourism board in Belfast. You can discover restaurants and nightlife destinations by asking me questions. For example, you can say, tell me an italian restaurant or recommend me a nightclub to go to.';
+  response.repromptText = 'For example, you can say, recommend me an italian restaurant or recommend me a nightclub to go to.';
   response.shouldEndSession = false;
   response.done();
 }
@@ -211,59 +218,7 @@ intentHandlers['HelloIntent'] = function(request,session,response,slots) {
 **/
 var MAX_RESPONSES = 1;
 var MAX_RESTAURANT_ITEMS = 10;
-
-
-intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
-  //Intent logic
-  //slots.CuisineItem
-
-  if(slots.CuisineType === undefined) {
-    response.speechText = 'You forgot to say the type of cuisine you wish to go to. For example, you can say, recommend me a european restaurant. ';
-    response.repromptText = 'For example, you can say, tell me about YuGo. ';
-    response.shouldEndSession = false;
-    response.done();
-    return;
-  }
-
-  var restaurantDb = require('./restaurant_db.json');
-  var cuisineResults = searchCuisineType(restaurantDb,slots.CuisineType);
-
-  response.cardTitle = `Restaurant results for: ${slots.CuisineType}`;
-  response.cardContent = '';
-  
-  if(cuisineResults.length==0) {
-    response.speechText = `Could not find any ${slots.CuisineType} restaurants. Please try a different cuisine. `;
-    response.cardContent += response.speechText;
-    response.shouldEndSession = true;
-    response.done();
-  } else {
-
-    cuisineResults.slice(0,MAX_RESPONSES).forEach( function(item) {
-      response.speechText  += `${item[0]} is located at ${item[1]} and serves ${item[2]} food. Food dishes include, ${item[3]}. `; 
-      response.cardContent += `'${item[0]}' is located at '${item[1]}' and serves '${item[2]}' food. Food dishes include, '${item[3]}.'`;
-    });
-
-
-    if(cuisineResults.length > MAX_RESPONSES) {
-      response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say more information to hear about them.  `; 
-      response.cardContent += `More restaurants matched your search. Please say more information to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
-      response.repromptText = `You can say more information or stop.`; 
-      session.attributes.resultLength = cuisineResults.length;
-      session.attributes.CuisineType = slots.CuisineType;
-      session.attributes.cuisineResults = cuisineResults.slice(MAX_RESPONSES,MAX_RESTAURANT_ITEMS);
-      response.shouldEndSession = false;
-      response.done();
-
-    } else {
-      response.shouldEndSession = true;
-      response.done();
-    }
-
-
-  }
-
-
-}
+var MAX_NIGHTLIFE_ITEMS = 10;
 
 intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
   //Intent logic
@@ -316,6 +271,112 @@ intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
 
 
 }
+
+intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
+  //Intent logic
+  //slots.CuisineType
+
+  if(slots.CuisineType === undefined) {
+    response.speechText = 'You forgot to say the type of cuisine you wish to go to. For example, you can say, recommend me a european restaurant. ';
+    response.repromptText = 'For example, you can say, tell me about YuGo. ';
+    response.shouldEndSession = false;
+    response.done();
+    return;
+  }
+
+  var restaurantDb = require('./restaurant_db.json');
+  var cuisineResults = searchCuisineType(restaurantDb,slots.CuisineType);
+
+  response.cardTitle = `Restaurant results for: ${slots.CuisineType}`;
+  response.cardContent = '';
+  
+  if(cuisineResults.length==0) {
+    response.speechText = `Could not find any ${slots.CuisineType} restaurants. Please try a different cuisine. `;
+    response.cardContent += response.speechText;
+    response.shouldEndSession = true;
+    response.done();
+  } else {
+
+    cuisineResults.slice(0,MAX_RESPONSES).forEach( function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]} and serves ${item[2]} food. Food dishes include, ${item[3]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}' and serves '${item[2]}' food. Food dishes include, '${item[3]}.'`;
+    });
+
+
+    if(cuisineResults.length > MAX_RESPONSES) {
+      response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say more information to hear about them.  `; 
+      response.cardContent += `More restaurants matched your search. Please say more information to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
+      response.repromptText = `You can say more information or stop.`; 
+      session.attributes.resultLength = cuisineResults.length;
+      session.attributes.CuisineType = slots.CuisineType;
+      session.attributes.cuisineResults = cuisineResults.slice(MAX_RESPONSES,MAX_RESTAURANT_ITEMS);
+      response.shouldEndSession = false;
+      response.done();
+
+    } else {
+      response.shouldEndSession = true;
+      response.done();
+    }
+
+
+  }
+
+
+}
+
+
+intentHandlers['GetNightlifeType'] = function(request,session,response,slots) {
+  //Intent logic
+  //slots.NightlifeType
+
+  if(slots.NightlifeType === undefined) {
+    response.speechText = 'You forgot to say whether you want to go to a bar or restaurant. For example, you can say, recommend me bar to go to. ';
+    response.repromptText = 'For example, you can say, recommend me a bar to go to. ';
+    response.shouldEndSession = false;
+    response.done();
+    return;
+  }
+
+  var nightlifeDb = require('./nightlife_db.json');
+  var nightlifeResults = searchNightlifeType(nightlifeDb,slots.NightlifeType);
+
+  response.cardTitle = `Nightlife results for: ${slots.NightlifeType}`;
+  response.cardContent = '';
+  
+  if(nightlifeResults.length==0) {
+    response.speechText = `Could not find any ${slots.NightlifeType} . Please try a different nightlife type. `;
+    response.cardContent += response.speechText;
+    response.shouldEndSession = true;
+    response.done();
+  } else {
+
+    nightlifeResults.slice(0,MAX_RESPONSES).forEach( function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+    });
+
+
+    if(nightlifeResults.length > MAX_RESPONSES) {
+      response.speechText += `There are more '${slots.NightlifeType}' results. Say more information to hear about them.  `; 
+      response.cardContent += `More '${slots.NightlifeType}' matched your search. Please say more information to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
+      response.repromptText = `You can say more information or stop.`; 
+      session.attributes.resultLength = nightlifeResults.length;
+      session.attributes.NightlifeType = slots.NightlifeType;
+      session.attributes.nightlifeResults = nightlifeResults.slice(MAX_RESPONSES,MAX_NIGHTLIFE_ITEMS);
+      response.shouldEndSession = false;
+      response.done();
+
+    } else {
+      response.shouldEndSession = true;
+      response.done();
+    }
+
+
+  }
+
+
+}
+
 
 intentHandlers['GetNextEventIntent'] = function(request,session,response,slots) {
 
@@ -514,6 +575,67 @@ function searchRestaurantInfo(rDb, RestaurantItem) {
 
   return restaurantFinalResult;
 }
+
+function searchNightlifeType(nDb, NightlifeType) {
+  NightlifeType = NightlifeType.toLowerCase();
+  NightlifeType = NightlifeType.replace(/,/g, '');
+  var NightlifeTypeWords = NightlifeType.split(/\s+/);
+  var regExps = []
+  var NightlifeTypeSearchResult = []
+
+
+  NightlifeTypeWords.forEach(function(nWord) {
+    regExps.push(new RegExp(`^${nWord}(es|s)?\\b`));
+    regExps.push(new RegExp(`^${nWord}`));
+  });
+
+  nDb.forEach( function (item) {
+    var match = 1;
+    var nightlifeTypeFullName = item[2]
+    var nWeight = 0;
+
+    NightlifeTypeWords.forEach(function(nWord) {
+      if(!nightlifeTypeFullName.match(nWord)) {
+        match = 0;
+      }
+    });
+
+    if(match==0) {
+      return;
+    }
+
+    regExps.forEach(function(rExp) {
+      if(nightlifeTypeFullName.match(rExp)) {
+        nWeight += 10;
+      }
+    });
+
+    if (nightlifeTypeFullName.split(/\s+/).length == NightlifeTypeWords.length) {
+        nWeight += 10;
+    }
+
+
+    NightlifeTypeSearchResult.push([item, nWeight]);
+
+  });
+
+  
+  var nightlifeTypeFinalResult = NightlifeTypeSearchResult.filter(function(x){return x[1]>=10});
+  if(nightlifeTypeFinalResult.length == 0) {
+    nightlifeTypeFinalResult = NightlifeTypeSearchResult;
+  } else {
+    nightlifeTypeFinalResult.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+  }
+
+  nightlifeTypeFinalResult = nightlifeTypeFinalResult.map(function(x) {
+    return x[0]
+  });
+
+  return nightlifeTypeFinalResult;
+}
+
 
 
 

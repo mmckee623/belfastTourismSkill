@@ -19,6 +19,33 @@
       "intent": "GetRestaurantType"
     },
     {
+      "slots": [
+        {
+          "name": "NightlifeType",
+          "type": "NIGHTLIFE_TYPES"
+        }
+      ],
+      "intent": "GetNightlifeType"
+    },
+    {
+      "slots": [
+        {
+          "name": "NightlifeMusic",
+          "type": "NIGHTLIFE_MUSIC"
+        }
+      ],
+      "intent": "GetNightlifeMusic"
+    },	
+    {
+      "slots": [
+        {
+          "name": "NightlifeDay",
+          "type": "NIGHTLIFE_DAY"
+        }
+      ],
+      "intent": "GetNightlifeDay"
+    },
+    {
       "intent": "GetNextEventIntent"
     },
     {

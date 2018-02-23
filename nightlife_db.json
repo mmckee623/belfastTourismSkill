@@ -3,308 +3,392 @@
 	[
 		"Duke of York",
 		"7-11 Commercial Court",
-		"Bar",
+		"bar",
 		"Classic pub down a cobbled alley with mirrored whiskey bar, old advertising signs and live music.",
+		"all week",
+		"bar music",		
 		"01"
 		
 	],
 	[
 		"Kelly's Cellars",
 		"30-32 Bank Street",
-		"Bar",
+		"bar",
 		"Simple, traditional venue filled with small tables and stools and serving beers, spirits and wines.",
+		"all week",
+		"bar music",		
 		"02"
 		
 	],	
 	[
 		"Fibber Magees",
 		"38-40 Great Victoria Street",
-		"Bar",
-		"Fibber Magees, Traditional Irish Music Bar based in Belfast. Nestled in the corner of Blackstaff Square, is the city’s hidden gem.",
+		"bar",
+		"Fibber Magees, Traditional Irish Music bar based in Belfast. Nestled in the corner of Blackstaff Square, is the city’s hidden gem.",
+		"all week",
+		"bar music",		
 		"03"
 	],
 	[
 		"Berts Jazz Bar",
 		"16 Skipper Street",
-		"Bar",
+		"bar",
 		"Themed after 1930s New York, this stylish hotel bar features live music and freshly mixed cocktails.",
+		"all week",
+		"bar music",		
 		"04"
 		
 	],
 	[
 		"Harp Bar",
 		"35 Hill Street",
-		"Bar",
+		"bar",
 		"Stylish pub with a plush decor of red furnishings and leather, plus a regular live music calendar.",
+		"all week",
+		"bar music",		
 		"05"
 		
 	],	
 	[
 		"Pavilion Bar",
 		"296-298 Ormeau Road",
-		"Bar",
+		"bar",
 		"Pub with TV sport, a candlelit Irish restaurant, a pool room with 6 tables and a rooftop terrace.",
+		"all week",
+		"bar music",		
 		"06"
 	],
 	[
 		"Sunflower Pub",
 		"65 Union Street",
-		"Bar",
+		"bar",
 		"The security cage has been retained at this renovated pub with a beer garden housing a pizza oven.",
+		"all week",
+		"bar music",		
 		"07"
 	],
 	[
 		"White's Tavern",
 		"12 High Street",
-		"Bar",
+		"bar",
 		"Antique ephemera decorates this simple, tucked-away 17th-century pub with open fires and oak beams.",
+		"all week",
+		"bar music",
 		"08"
 		
 	],
 	[
 		"Morning Star",
 		"17-19 Pottingers Entry",
-		"Bar",
+		"bar",
 		"A cosy 19th-century alehouse with a mahogany bar and terrazzo floor.",
+		"all week",
+		"bar music",		
 		"09"
 		
 	],	
 	[
 		"The Woodworkers",
 		"20-22 Bradbury Place",
-		"Bar",
+		"bar",
 		"Offers the best craft beers from around the world on six rotating taps.",
+		"all week",
+		"bar music",		
 		"10"		
 	],
 	[
 		"Maddens Bar",
 		"74 Berry Street",
-		"Bar",
+		"bar",
 		"Traditional Irish music bar in Belfast.",
+		"all week",
+		"bar music",		
 		"11"
 	],
 	[
 		"Lavery's Bar",
 		"12-18 Bradbury Place",
-		"Bar",
+		"bar",
 		"Long-standing traditional bar with sport on TV, a pool room with 18 tables, and a roof terrace.",
+		"all week",
+		"bar music",		
 		"12"
 		
 	],
 	[
 		"The Belfast Empire",
 		"42 Botanic Avenue",
-		"Bar",
+		"bar",
 		"3 floors of bars and music, including blues, rock, jazz and traditional Irish acts, plus comedy.",
+		"all week",
+		"bar music",		
 		"13"
 		
 	],	
 	[
 		"The Dirty Onion",
 		"Apartment 3 54 Hill Street",
-		"Bar",
+		"bar",
 		"Traditional looking pub with a modern vibe including a Jameson barrel sculpture in the beer garden.",
+		"all week",
+		"bar music",		
 		"14"		
 	],
 	[
 		"The Points",
 		"44 Dublin Road",
-		"Bar",
+		"bar",
 		"Provides a traditional experience for Belfast’s ever growing tourist community whilst capturing the hearts of our locals.",
+		"all week",
+		"bar music",		
 		"15"		
 	],
 	[
 		"Muriels Cafe Bar",
 		"12-14 Church Lane",
-		"Bar",
+		"bar",
 		"This glorious little retreat is all damask drapes, velvet seating and dark walls illuminated with mirrors, chandeliers and an open fire.",
+		"all week",
+		"bar music",		
 		"16"
 	],
 	[
 		"Benedicts Bar",
 		"7-21 Bradbury Place",
-		"Bar",
+		"bar",
 		"Benedicts Bar in Belfast attracts beer lovers, wine lovers, dance movers and cocktail shakers from all over the country every night.",
+		"all week",
+		"bar music",		
 		"17"
 		
 	],
 	[
 		"Ryans Belfast",
 		"116-118 Lisburn Road",
-		"Bar",
+		"bar",
 		"Casual place with exposed brick walls and wooden floors.",
+		"all week",
+		"bar music",		
 		"18"
 		
 	],	
 	[
 		"Black Box",
 		"18-22 Hill Street, Cathedral Quarter",
-		"Bar",
+		"bar",
 		"Performance and arts venue with music, theatre, comedy, film, visual art, circus, cabaret and bar.",
+		"all week",
+		"bar music",		
 		"19"		
 	],
 	[
 		"McHugh's",
 		"33 Queens Street",
-		"Bar",
+		"bar",
 		"Georgian hostelry dating to 1711, with traditional bar and basement live music.",
+		"all week",
+		"bar music",		
 		"20"
 	],
 	[
 		"The Bar at Fitzwilliam Hotel",
 		"Great Victoria Street",
-		"Bar",
+		"bar",
 		"The bar at the Fitzwilliam Hotel Belfast is an ultra-chic home to the city's great and the atmosphere is lively and warm.",
+		"all week",
+		"bar music",		
 		"21"
 		
 	],
 	[
 		"Hunting Lodge Belfast",
 		"39 Stewartstown Road",
-		"Bar",
+		"bar",
 		"Good venue with good drink selection.",
+		"all week",
+		"bar music",		
 		"22"
 		
 	],	
 	[
 		"Felons",
 		"537 Anderstown Road",
-		"Bar",
+		"bar",
 		"This Catholic-area bar often features live bands.",
+		"all week",
+		"bar music",		
 		"23"		
 	],
 	[
 		"Bittles Bar",
 		"103 Victoria Street",
-		"Bar",
+		"bar",
 		"One of Belfast's more curious pubs, located close to the bustling Victoria Square. Red-bricked and 'flat-iron' in shape, Bittles is a wonderful example of a traditional Victorian Bar.",
+		"all week",
+		"bar music",
 		"24"
 		
 	],
 	[
 		"The Garrick Bar",
 		"29 Chichester Street",
-		"Bar",
+		"bar",
 		"Smart, panelled and tiled Victorian hostelry with 3 bars, offering pub menu, live music and DJs.",
+		"all week",
+		"bar music",		
 		"25"	
 	],	
 	[
 		"The Northern Whig Bar",
 		"2-10 Bridge Street",
-		"Bar",
+		"bar",
 		"Striking designer bar with granite statues, offering a cosmopolitan menu of cocktails.",
+		"all week",
+		"bar music",		
 		"26"		
 	],
 	[
 		"Apartment",
 		"2 Donegall Square West",
-		"Bar",
+		"bar",
 		"Most stylish newly refurbished bar overlooking Belfast City Hall.",
+		"all week",
+		"bar music",		
 		"27"
 	],
 	[
 		"The Doyen",
 		"829 Lisburn Road",
-		"Bar",
+		"bar",
 		"Fantastic Cocktails and live music.",
+		"all week",
+		"bar music",		
 		"28"		
 	],
 	[
 		"Cuckoo",
 		"149 Lisburn Road",
-		"Bar",
+		"bar",
 		"Geek themed bar and night club in Belfast.",
+		"all week",
+		"bar music",		
 		"29"	
 	],	
 	[
 		"Cloth Ear (Merchant Hotel)",
 		"33 Waring Street",
-		"Bar",
+		"bar",
 		"Classy pub-style menu in a buzzy bar with quirky decor, situated in an upscale hotel.",
+		"all week",
+		"bar music",
 		"30"		
 	],
 	[
 		"Thompson's Garage",
 		"3 Pattersons Place",
-		"Nightclub",
+		"nightclub",
 		"Popular nightclub that plays lots of house and techno.",
+		"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
+		"Techno",
 		"31"
 	],
 	[
 		"Botanic Inn",
 		"23-27 Malone Road",
-		"Nightclub",
+		"nightclub",
 		"Large and vibrant spot for drinking, dining, live music and late night dancing with 3 separate bars.",
+		"Monday, Wednesday",
+		"Chart",
 		"32"
 	],
 	[
 		"Alibi",
 		"23-31 Bradbury Place",
-		"Nightclub",
+		"nightclub",
 		"Showcasing the very best in local talent and guest DJs from the Marbella and Ibiza scene.",
+		"Friday, Saturday",
+		"RnB",
 		"33"
 	],
 	[
 		"Fourteen Belfast",
 		"10-14 Tomb Street",
-		"Nightclub",
+		"nightclub",
 		"Belfast’s newest city centre venue offering 4 different experiences across 3 floors & bringing your Northern Ireland’s first Grey Goose Lounge.",
+		"Tuesday, Friday, Saturday",
+		"RnB",
 		"34"
 	],
 	[
 		"Lux",
 		"2-16 Dunbar Street",
-		"Nightclub",
+		"nightclub",
 		"Nightclub in Belfast's Cathedral Quarter",
+		"Friday, Saturday",
+		"RnB",
 		"35"
 	],
 	[
 		"Lavery's Belfast",
 		"12-18 Bradbury Place",
-		"Nightclub",
+		"nightclub",
 		"Long-standing traditional bar with sport on TV, a pool room with 18 tables, and a roof terrace.",
+		"Thursday",
+		"Rock",
 		"36"
 	],
 	[
 		"Plastik",
 		"Mays Meadow",
-		"Nightclub",
+		"nightclub",
 		"Formerly El Divino. New Club, new music, new ethos.",
+		"Friday, Saturday",
+		"Chart",
 		"37"
 	],
 	[
 		"Ollie's Club",
 		"Merchant Hotel, 35-39 Waring Street",
-		"Nightclub",
+		"nightclub",
 		"Situated in the basement of the Merchant building in what used to be the old bank's vaults.",
+		"Monday, Thursday, Friday, Saturday",
+		"Chart",
 		"38"
 	],
 	[
 		"Chinawhite",
 		"43 Franklin Street",
-		"Nightclub",
+		"nightclub",
 		"Situated on Franklin Street, Chinawhite will be bringing a new era of clubbing to Belfast",
+		"Tuesday, Friday, Saturday",
+		"Hip Hop",
 		"39"
 	],
 	[
 		"Foundry",
 		"1 Bankmore Square",
-		"Nightclub",
+		"nightclub",
 		"Close to the thriving Dublin Road area is Belfast's newest venue catering for the insatiable demand of forward thinking club culture in the city.",
+		"Thursday, Friday, Saturday",
+		"Techno",
 		"40"
 	],
 	[
 		"Limelight",
 		"17 Ormeau Avenue",
-		"Nightclub",
+		"nightclub",
 		"This no-frills nightclub and live music venue has been staging rock & indie greats since the 1980s.",
+		"Monday, Tuesday, Thursday, Friday, Saturday",
+		"Rock",
 		"41"
 	],
 	[
 		"Filthy McNastys",
 		"45 Dublin Road",
-		"Nightclub",
+		"nightclub",
 		"The quirky décor consisting of mannequins and vintage vinyls adorning the walls create a unique charm which makes everyone feel welcome.",
+		"Tuesday, Friday, Saturday",
+		"Techno",
 		"42"
 	]
 	
