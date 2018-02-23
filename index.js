@@ -429,6 +429,58 @@ intentHandlers['GetNightlifeMusic'] = function(request,session,response,slots) {
 
 }
 
+intentHandlers['GetNightlifeDay'] = function(request,session,response,slots) {
+  //Intent logic
+  //slots.NightlifeDay
+
+  if(slots.NightlifeDay === undefined) {
+    response.speechText = 'You forgot to say what day you want to go out. For example, you can say, where is good to go on a Tuesday. ';
+    response.repromptText = 'For example, you can say, where is good to go on a Tuesday. ';
+    response.shouldEndSession = false;
+    response.done();
+    return;
+  }
+
+  var nightlifeDb = require('./nightlife_db.json');
+  var nightlifeDayResults = searchNightlifeDay(nightlifeDb,slots.NightlifeDay);
+
+  response.cardTitle = `Nightlife results for: ${slots.NightlifeDay}`;
+  response.cardContent = '';
+  
+  if(nightlifeDayResults.length==0) {
+    response.speechText = `Could not find any ${slots.NightlifeDay} . Please try a different nightlife type. `;
+    response.cardContent += response.speechText;
+    response.shouldEndSession = true;
+    response.done();
+  } else {
+
+    nightlifeDayResults.slice(0,MAX_RESPONSES).forEach( function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+    });
+
+
+    if(nightlifeDayResults.length > MAX_RESPONSES) {
+      response.speechText += `There are more '${slots.NightlifeDay}' results. Say more information to hear about them.  `; 
+      response.cardContent += `More '${slots.NightlifeDay}' matched your search. Please say more information to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
+      response.repromptText = `You can say more information or stop.`; 
+      session.attributes.resultLength = nightlifeDayResults.length;
+      session.attributes.NightlifeDay = slots.NightlifeDay;
+      session.attributes.nightlifeDayResults = nightlifeDayResults.slice(MAX_RESPONSES,MAX_NIGHTLIFE_ITEMS);
+      response.shouldEndSession = false;
+      response.done();
+
+    } else {
+      response.shouldEndSession = true;
+      response.done();
+    }
+
+
+  }
+
+
+}
+
 
 intentHandlers['GetNextEventIntent'] = function(request,session,response,slots) {
 
@@ -746,6 +798,66 @@ function searchNightlifeMusic(nDb, NightlifeMusic) {
   });
 
   return NightlifeMusicFinalResult;
+}
+
+function searchNightlifeDay(nDb, NightlifeDay) {
+  NightlifeDay = NightlifeDay.toLowerCase();
+  NightlifeDay = NightlifeDay.replace(/,/g, '');
+  var NightlifeDayWords = NightlifeDay.split(/\s+/);
+  var regExps = []
+  var NightlifeDaySearchResult = []
+
+
+  NightlifeDayWords.forEach(function(dWord) {
+    regExps.push(new RegExp(`^${dWord}(es|s)?\\b`));
+    regExps.push(new RegExp(`^${dWord}`));
+  });
+
+  nDb.forEach( function (item) {
+    var match = 1;
+    var nightlifeDayFullName = item[4]
+    var dWeight = 0;
+
+    NightlifeDayWords.forEach(function(dWord) {
+      if(!nightlifeDayFullName.match(dWord)) {
+        match = 0;
+      }
+    });
+
+    if(match==0) {
+      return;
+    }
+
+    regExps.forEach(function(rExp) {
+      if(nightlifeDayFullName.match(rExp)) {
+        dWeight += 10;
+      }
+    });
+
+    if (nightlifeDayFullName.split(/\s+/).length == NightlifeDayWords.length) {
+        dWeight += 10;
+    }
+
+
+    NightlifeDaySearchResult.push([item, dWeight]);
+
+  });
+
+  
+  var nightlifeDayFinalResult = NightlifeDaySearchResult.filter(function(x){return x[1]>=10});
+  if(nightlifeDayFinalResult.length == 0) {
+    nightlifeDayFinalResult = NightlifeDaySearchResult;
+  } else {
+    nightlifeDayFinalResult.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+  }
+
+  nightlifeDayFinalResult = nightlifeDayFinalResult.map(function(x) {
+    return x[0]
+  });
+
+  return nightlifeDayFinalResult;
 }
 
 
