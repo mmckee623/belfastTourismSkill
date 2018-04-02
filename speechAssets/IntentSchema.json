@@ -45,6 +45,15 @@
       ],
       "intent": "GetNightlifeDay"
     },
+   {
+      "slots": [
+        {
+          "name": "TourismFact",
+          "type": "TOURISM_FACT"
+        }
+      ],
+      "intent": "GetFact"
+    },	
     {
       "intent": "GetNextEventIntent"
     },

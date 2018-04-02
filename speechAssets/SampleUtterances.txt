@@ -1,57 +1,57 @@
-GetRestaurantInfo tell me about {RestaurantItem}
-GetRestaurantInfo what is the location of {RestaurantItem}
-GetRestaurantInfo where is {RestaurantItem} located
+Getrestaurantinfo tell me about {restaurantitem}
+getrestaurantinfo what is the location of {restaurantitem}
+getrestaurantinfo where is {restaurantitem} located
 
-GetRestaurantType I would like to go to a {CuisineType} restaurant
-GetRestaurantType I want to go to a {CuisineType} restaurant
-GetRestaurantType I want go to a {CuisineType} tonight
-GetRestaurantType I want go to a {CuisineType} today
-GetRestaurantType I want go to a {CuisineType} this evening
-GetRestaurantType I want to go to an {CuisineType} restaurant
-GetRestaurantType I want go to an {CuisineType} tonight
-GetRestaurantType I want go to an {CuisineType} today
-GetRestaurantType I want go to an {CuisineType} this evening
-GetRestaurantType Tell me a {CuisineType} restuarant
-GetRestaurantType Give me a {CuisineType} restaurant
-GetRestaurantType Suggest a {CuisineType} to go to
-GetRestaurantType Suggest a {CuisineType} restaurant to go to
-GetRestaurantType Recommend me a {CuisineType} restaurant
-GetRestaurantType Tell me an {CuisineType} restuarant
-GetRestaurantType Give me an {CuisineType} restaurant
-GetRestaurantType Suggest an {CuisineType} to go to
-GetRestaurantType Suggest an {CuisineType} restaurant to go to
-GetRestaurantType Recommend me an {CuisineType} restaurant
-GetRestaurantType Recommend an {CuisineType} restaurant
-GetRestaurantType Recommend a {CuisineType} restaurant
+getrestauranttype i would like to go to a {cuisinetype} restaurant
+getrestauranttype i want to go to a {cuisinetype} restaurant
+getrestauranttype i want go to a {cuisinetype} tonight
+getrestauranttype i want go to a {cuisinetype} today
+getrestauranttype i want go to a {cuisinetype} this evening
+getrestauranttype i want to go to an {cuisinetype} restaurant
+getrestauranttype i want go to an {cuisinetype} tonight
+getrestauranttype i want go to an {cuisinetype} today
+getrestauranttype i want go to an {cuisinetype} this evening
+getrestauranttype tell me a {cuisinetype} restuarant
+getrestauranttype give me a {cuisinetype} restaurant
+getrestauranttype suggest a {cuisinetype} to go to
+getrestauranttype suggest a {cuisinetype} restaurant to go to
+getrestauranttype recommend me a {cuisinetype} restaurant
+getrestauranttype tell me an {cuisinetype} restuarant
+getrestauranttype give me an {cuisinetype} restaurant
+getrestauranttype suggest an {cuisinetype} to go to
+getrestauranttype suggest an {cuisinetype} restaurant to go to
+getrestauranttype recommend me an {cuisinetype} restaurant
+getrestauranttype recommend an {cuisinetype} restaurant
+getrestauranttype recommend a {cuisinetype} restaurant
 
-GetNightlifeType Tell me a {NightlifeType} 
-GetNightlifeType Recommend me a {NightlifeType}
-GetNightlifeType Recommend a {NightlifeType} for tonight
-GetNightlifeType What is a good {NightlifeType} to go to
-GetNightlifeType Tell me a {NightlifeType} I can get drunk at
-GetNightlifeType Suggest a {NightlifeType} 
-GetNightlifeType Suggest a good {NightlifeType} to go to
-GetNightlifeType Suggest a good {NightlifeType} for tonight
-GetNightlifeType Suggest a good {NightlifeType} for today
-GetNightlifeType Give me a {NightlifeType} to go to
+getnightlifetype tell me a {nightlifetype} 
+getnightlifetype recommend me a {nightlifetype}
+getnightlifetype recommend a {nightlifetype} for tonight
+getnightlifetype what is a good {nightlifetype} to go to
+getnightlifetype tell me a {nightlifetype} i can get drunk at
+getnightlifetype suggest a {nightlifetype} 
+getnightlifetype suggest a good {nightlifetype} to go to
+getnightlifetype suggest a good {nightlifetype} for tonight
+getnightlifetype suggest a good {nightlifetype} for today
+getnightlifetype give me a {nightlifetype} to go to
 
-GetNightlifeDay Recommend me a nightclub on {NightlifeDay}
-GetNightlifeDay Tell me a nightclub on {NightlifeDay}
-GetNightlifeDay Give me a nightclub to go to on {NightlifeDay}
-GetNightlifeDay Where's good to go on {NightlifeDay}
-GetNightlifeDay What nightclub is open on {NightlifeDay}
-GetNightlifeDay What club is open on {NightlifeDay}
-GetNightlifeDay Where open on {NightlifeDay}
+getnightlifeday recommend me a nightclub on {nightlifeday}
+getnightlifeday tell me a nightclub on {nightlifeday}
+getnightlifeday give me a nightclub to go to on {nightlifeday}
+getnightlifeday where's good to go on {nightlifeday}
+getnightlifeday what nightclub is open on {nightlifeday}
+getnightlifeday what club is open on {nightlifeday}
+getnightlifeday where open on {nightlifeday}
 
-GetNightlifeMusic Recommend me a place that plays {NightlifeMusic} music
-GetNightlifeMusic Tell me a place that plays {NightlifeMusic} music
-GetNightlifeMusic Where plays {NightlifeMusic}
-GetNightlifeMusic What place plays {NightlifeMusic}
-GetNightlifeMusic where's good for {NightlifeMusic}
-GetNightlifeMusic where plays good {NightlifeMusic}
-GetNightlifeMusic recommend a good {NightlifeMusic}
-GetNightlifeMusic recommend a good {NightlifeMusic} club
-where plays the best {NightlifeMusic} music
+getnightlifemusic recommend me a place that plays {nightlifemusic} music
+getnightlifemusic tell me a place that plays {nightlifemusic} music
+getnightlifemusic where plays {nightlifemusic}
+getnightlifemusic what place plays {nightlifemusic}
+getnightlifemusic where's good for {nightlifemusic}
+getnightlifemusic where plays good {nightlifemusic}
+getnightlifemusic recommend a good {nightlifemusic}
+getnightlifemusic recommend a good {nightlifemusic} club
+getnightlifemusic where plays the best {nightlifemusic} music
 
-GetNextEventIntent more information
-GetNextEventIntent more
+getnexteventintent more information
+getnexteventintent more
