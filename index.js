@@ -517,14 +517,12 @@ intentHandlers['AMAZON.HelpIntent'] = function(request,session,response,slots) {
 
 function searchCuisineType(rDb, CuisineType) {
   CuisineType = CuisineType.toLowerCase();
-  CuisineType = CuisineType.replace(/,/g, '');
-  var CuisineWords = CuisineType.split(/\s+/);
+  var CuisineWords = CuisineType.split();
   var regExps = []
   var CuisineSearchResult = []
 
 
   CuisineWords.forEach(function(cWord) {
-    regExps.push(new RegExp(`^${cWord}(es|s)?\\b`));
     regExps.push(new RegExp(`^${cWord}`));
   });
 
@@ -635,14 +633,12 @@ function searchRestaurantInfo(rDb, RestaurantItem) {
 
 function searchNightlifeType(nDb, NightlifeType) {
   NightlifeType = NightlifeType.toLowerCase();
-  NightlifeType = NightlifeType.replace(/,/g, '');
-  var NightlifeTypeWords = NightlifeType.split(/\s+/);
+  var NightlifeTypeWords = NightlifeType.split();
   var regExps = []
   var NightlifeTypeSearchResult = []
 
 
   NightlifeTypeWords.forEach(function(nWord) {
-    regExps.push(new RegExp(`^${nWord}(es|s)?\\b`));
     regExps.push(new RegExp(`^${nWord}`));
   });
 
@@ -695,14 +691,12 @@ function searchNightlifeType(nDb, NightlifeType) {
 
 function searchNightlifeMusic(nDb, NightlifeMusic) {
   NightlifeMusic = NightlifeMusic.toLowerCase();
-  NightlifeMusic = NightlifeMusic.replace(/,/g, '');
-  var NightlifeMusicWords = NightlifeMusic.split(/\s+/);
+  var NightlifeMusicWords = NightlifeMusic.split();
   var regExps = []
   var NightlifeMusicSearchResult = []
 
 
   NightlifeMusicWords.forEach(function(mWord) {
-    regExps.push(new RegExp(`^${mWord}(es|s)?\\b`));
     regExps.push(new RegExp(`^${mWord}`));
   });
 
@@ -755,14 +749,12 @@ function searchNightlifeMusic(nDb, NightlifeMusic) {
 
 function searchNightlifeDay(nDb, NightlifeDay) {
   NightlifeDay = NightlifeDay.toLowerCase();
-  NightlifeDay = NightlifeDay.replace(/,/g, '');
-  var NightlifeDayWords = NightlifeDay.split(/\s+/);
+  var NightlifeDayWords = NightlifeDay.split();
   var regExps = []
   var NightlifeDaySearchResult = []
 
 
   NightlifeDayWords.forEach(function(dWord) {
-    regExps.push(new RegExp(`^${dWord}(es|s)?\\b`));
     regExps.push(new RegExp(`^${dWord}`));
   });
 
