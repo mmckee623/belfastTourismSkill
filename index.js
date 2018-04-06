@@ -274,7 +274,7 @@ intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
 
   if(slots.CuisineType === undefined) {
     response.speechText = 'You forgot to say the type of cuisine you wish to go to. For example, you can say, recommend me a european restaurant. ';
-    response.repromptText = 'For example, you can say, tell me about YuGo. ';
+    response.repromptText = 'For example, you can say, recommend me a european restaurant. ';
     response.shouldEndSession = false;
     response.done();
     return;
@@ -300,8 +300,8 @@ intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
 
 
     if(cuisineResults.length > MAX_RESPONSES) {
-      response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say more information to hear about them.  `; 
-      response.cardContent += `More restaurants matched your search. Please say more information to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
+      response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say 'more restaurants' to hear about them.  `; 
+      response.cardContent += `More restaurants matched your search. Please say 'more restaurants' to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
       response.repromptText = `You can say more information or stop.`; 
       session.attributes.resultLength = cuisineResults.length;
       session.attributes.CuisineType = slots.CuisineType;
@@ -326,8 +326,8 @@ intentHandlers['GetNightlifeType'] = function(request,session,response,slots) {
   //slots.NightlifeType
 
   if(slots.NightlifeType === undefined) {
-    response.speechText = 'You forgot to say whether you want to go to a bar or restaurant. For example, you can say, recommend me bar to go to. ';
-    response.repromptText = 'For example, you can say, recommend me a bar to go to. ';
+    response.speechText = 'You forgot to say whether you want to go to a bar or restaurant. For example, you can say, recommend me a bar. ';
+    response.repromptText = 'For example, you can say, recommend me a bar. ';
     response.shouldEndSession = false;
     response.done();
     return;
@@ -478,7 +478,7 @@ intentHandlers['GetNightlifeDay'] = function(request,session,response,slots) {
 }
 
 
-intentHandlers['GetNextEventIntent'] = function(request,session,response,slots) {
+intentHandlers['GetNextCuisineIntent'] = function(request,session,response,slots) {
 
   if(session.attributes.cuisineResults) {
     response.cardTitle = `Other restaurants found: ${session.attributes.CuisineType}`;
@@ -491,13 +491,49 @@ intentHandlers['GetNextEventIntent'] = function(request,session,response,slots) 
       response.speechText += `Here are your other results. ${item[0]} is located at ${item[1]}. Food dishes include, ${item[3]}. `; 
       response.cardContent += `'${item[0]}'\n`;
     });
-  } else {
+  } 
+  else {
     response.speechText  = `Wrong invocation of this intent. `;
   }
   response.shouldEndSession = true;
   response.done();
 
 };
+
+intentHandlers['GetNextNightlifeIntent'] = function(request,session,response,slots) {
+
+    if (session.attributes.nightlifeResults) {
+    response.cardTitle = `Other restaurants found: ${session.attributes.NightlifeType}`;
+
+    response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+    response.cardContent = `${response.speechText}\n`;
+
+
+    session.attributes.nightlifeResults.forEach(function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+    })
+  } 
+  else if (session.attributes.musicResults) {
+    response.cardTitle = `Other restaurants found: ${session.attributes.NightlifeMusic}`;
+
+    response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+    response.cardContent = `${response.speechText}\n`;
+
+
+    session.attributes.musicResults.forEach(function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+    });
+  } 
+  else {
+    response.speechText  = `Wrong invocation of this intent. `;
+  }
+  response.shouldEndSession = true;
+  response.done();
+
+};
+
 
 
 intentHandlers['AMAZON.StopIntent'] = function(request,session,response,slots) {

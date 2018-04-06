@@ -59,7 +59,7 @@ var event = {
       userId: 'usrid123'
     },
     application: {
-      applicationId: 'amzn1.ask.skill.f5cf61da-007e-4d6f-8db4-9325c0735787'
+      applicationId: 'amzn1.ask.skill.356e2abd-4717-4193-910d-9ee4ad6f7e8a'
     }
   },
   version: '1.0',
@@ -104,7 +104,7 @@ describe('All intents', function() {
      });
 
      it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/<speak>Hi,.*<\/speak>/);
+       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/<speak>Welcome to the newest tourism board in Belfast.*<\/speak>/);
      });
     
      it('valid outputSpeech', function() {
@@ -114,19 +114,43 @@ describe('All intents', function() {
   });
 
   var expResults = {
-    'butter salted': {
+    'asian': {
       endSession: true,
       searchResults: 1
     },
-    'orange': {
+    'irish': {
       endSession: false,
-      searchResults: 18
+      searchResults: 8
     },
-    'apples raw': {
+    'indian': {
       endSession: false,
-      searchResults: 11
+      searchResults: 5
     },
-    'toy': {
+    'british': {
+      endSession: false,
+      searchResults: 2
+    },
+    'european': {
+      endSession: false,
+      searchResults: 7
+    },
+    'chinese': {
+      endSession: true,
+      searchResults: 1
+    },
+    'steakhouse': {
+      endSession: true,
+      searchResults: 1
+    },
+    'seafood': {
+      endSession: true,
+      searchResults: 1
+    },
+    'italian': {
+      endSession: false,
+      searchResults: 4
+    },
+    'summer': {
       endSession: true,
       searchResults: 0
     }
@@ -134,20 +158,20 @@ describe('All intents', function() {
 
   for(var key in expResults) {
 
-    describe(`Test GetNutritionInfo ${key}`, function() {
+    describe(`Test GetRestaurantType ${key}`, function() {
         var options = expResults[key];
-        var testFood = key;
+        var testCuisine = key;
 
 
         before(function(done) {
           event.request.intent = {};
           event.session.attributes = {};
           event.request.type = 'IntentRequest';
-          event.request.intent.name = 'GetNutritionInfo';
+          event.request.intent.name = 'GetRestaurantType';
           event.request.intent.slots = {
-            FoodItem: {
-              name: 'FoodItem',
-              value: testFood
+            CuisineType: {
+              name: 'CuisineType',
+              value: testCuisine
             }
           };
           ctx.done = done;
@@ -162,18 +186,6 @@ describe('All intents', function() {
          validCard(ctx);
        });
 
-       it('valid outputSpeech', function() {
-         if(options.searchResults === 0) {
-           expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/Could not find any food item/);
-         } else {
-           var num = ctx.speechResponse.response.outputSpeech.ssml.match(/100 grams/g).length;
-           if(options.searchResults > 3) {
-             expect(num).to.be.equal(3);
-           } else {
-             expect(num).to.be.equal(options.searchResults);
-           }
-         }
-       });
 
       if(!options.endSession) {
        it('valid reprompt', function() {
@@ -203,14 +215,7 @@ describe('All intents', function() {
            validRsp(ctx, {endSession: true});
          });
 
-         it('valid card', function() {
-           validCard(ctx);
-           expect(ctx.speechResponse.response.card.content).to.match(new RegExp(`Your search resulted in ${options.searchResults} food items`));
-         });
 
-         it('valid outputSpeech', function() {
-           expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(new RegExp(`Your search resulted in ${options.searchResults} food items`));
-         });
 
          //it('valid reprompt', function() {
          //  validReprompt(ctx);
@@ -252,13 +257,13 @@ describe('All intents', function() {
     }
   }
 
-  describe(`Test GetNutritionInfo empty slot`, function() {
+  describe(`Test GetRestaurantType empty slot`, function() {
 
       before(function(done) {
         event.request.intent = {};
         event.session.attributes = {};
         event.request.type = 'IntentRequest';
-        event.request.intent.name = 'GetNutritionInfo';
+        event.request.intent.name = 'GetRestaurantType';
         event.request.intent.slots = {};
         ctx.done = done;
         lambdaToTest.handler(event , ctx);
@@ -270,145 +275,11 @@ describe('All intents', function() {
 
 
      it('valid outputSpeech', function() {
-         expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/Looks like/);
+         expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/You forgot to say/);
      });
 
      it('valid reprompt', function() {
        expect(ctx.speechResponse.response.reprompt.outputSpeech.ssml).to.match(/For example/);
-     });
-
-  });
-
-
-  describe(`Test GetQuizIntent`, function() {
-      before(function(done) {
-        event.request.intent = {};
-        event.session.attributes = {};
-        event.request.type = 'IntentRequest';
-        event.request.intent.name = 'GetQuizIntent';
-        event.request.intent.slots = {};
-        ctx.done = done;
-        lambdaToTest.handler(event , ctx);
-      });
-
-     it('valid response', function() {
-       storedSession = ctx.speechResponse.sessionAttributes;
-       validRsp(ctx, {endSession:false});
-     });
-
-     it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/How many/);
-     });
-
-     it('valid reprompt', function() {
-       expect(ctx.speechResponse.response.reprompt.outputSpeech.ssml).to.match(/Please tell/);
-     });
-
-  });
-
-  describe(`Test QuizAnswerIntent correct answer`, function() {
-      before(function(done) {
-        var fruitInfo = storedSession.fruit;
-        event.request.intent = {};
-        event.session.attributes = ctx.speechResponse.sessionAttributes;
-        event.request.type = 'IntentRequest';
-        event.request.intent.name = 'QuizAnswerIntent';
-        event.request.intent.slots = {
-          Answer: {
-            name: 'Answer',
-            value: fruitInfo[1].toString()
-          }
-        };
-        ctx.done = done;
-        lambdaToTest.handler(event , ctx);
-      });
-
-     it('valid response', function() {
-       validRsp(ctx, {endSession:true});
-     });
-
-     it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/Correct answer./);
-     });
-
-  });
-
-  describe(`Test QuizAnswerIntent close answer`, function() {
-      before(function(done) {
-        var fruitInfo = storedSession.fruit;
-        var answer = Number(fruitInfo[1]) + Math.floor(Math.random()*8) - 4;
-        if(answer === Number(fruitInfo[1])) {
-          answer += 1;
-        }
-        event.request.intent = {};
-        event.session.attributes = storedSession;
-        event.request.type = 'IntentRequest';
-        event.request.intent.name = 'QuizAnswerIntent';
-        event.request.intent.slots = {
-          Answer: {
-            name: 'Answer',
-            value: answer.toString()
-          }
-        };
-        ctx.done = done;
-        lambdaToTest.handler(event, ctx);
-      });
-
-     it('valid response', function() {
-       validRsp(ctx, {endSession:true});
-     });
-
-     it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/You are pretty close./);
-     });
-
-  });
-
-  describe(`Test QuizAnswerIntent wrong answer`, function() {
-      before(function(done) {
-        var fruitInfo = storedSession.fruit;
-        var answer = Number(fruitInfo[1]) + Math.floor(Math.random()*10) + 5;
-        event.request.intent = {};
-        event.session.attributes = storedSession;
-        event.request.type = 'IntentRequest';
-        event.request.intent.name = 'QuizAnswerIntent';
-        event.request.intent.slots = {
-          Answer: {
-            name: 'Answer',
-            value: answer.toString()
-          }
-        };
-        ctx.done = done;
-        lambdaToTest.handler(event , ctx);
-      });
-
-     it('valid response', function() {
-       validRsp(ctx, {endSession:true});
-     });
-
-     it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/Wrong answer./);
-     });
-
-  });
-
-  describe(`Test DontKnowIntent`, function() {
-      before(function(done) {
-        event.request.intent = {};
-        event.session.attributes = storedSession;
-        event.request.type = 'IntentRequest';
-        event.request.intent.name = 'DontKnowIntent';
-        event.request.intent.slots = {};
-        ctx.done = done;
-        lambdaToTest.handler(event , ctx);
-      });
-
-     it('valid response', function() {
-       validRsp(ctx, {endSession:true});
-     });
-
-     it('valid outputSpeech', function() {
-       expect(ctx.speechResponse.response.outputSpeech.ssml).to.match(/No problem./);
      });
 
   });
