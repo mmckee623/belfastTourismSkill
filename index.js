@@ -218,7 +218,7 @@ intentHandlers['HelloIntent'] = function(request,session,response,slots) {
 **/
 var MAX_RESPONSES = 1;
 var MAX_RESTAURANT_ITEMS = 10;
-var MAX_NIGHTLIFE_ITEMS = 10;
+var MAX_NIGHTLIFE_ITEMS = 5;
 
 intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
   //Intent logic
@@ -302,7 +302,7 @@ intentHandlers['GetRestaurantType'] = function(request,session,response,slots) {
     if(cuisineResults.length > MAX_RESPONSES) {
       response.speechText += `There are more '${slots.CuisineType}' restaurant results. Say 'more restaurants' to hear about them.  `; 
       response.cardContent += `More restaurants matched your search. Please say 'more restaurants' to discover more great restaurants. Otherwise, say stop if you don't want to hear about them. `; 
-      response.repromptText = `You can say more information or stop.`; 
+      response.repromptText = `You can say 'more restaurants' or stop.`; 
       session.attributes.resultLength = cuisineResults.length;
       session.attributes.CuisineType = slots.CuisineType;
       session.attributes.cuisineResults = cuisineResults.slice(MAX_RESPONSES,MAX_RESTAURANT_ITEMS);
@@ -326,7 +326,7 @@ intentHandlers['GetNightlifeType'] = function(request,session,response,slots) {
   //slots.NightlifeType
 
   if(slots.NightlifeType === undefined) {
-    response.speechText = 'You forgot to say whether you want to go to a bar or restaurant. For example, you can say, recommend me a bar. ';
+    response.speechText = 'You forgot to say whether you want to go to a bar or nightclub. For example, you can say, recommend me a bar. ';
     response.repromptText = 'For example, you can say, recommend me a bar. ';
     response.shouldEndSession = false;
     response.done();
@@ -477,6 +477,27 @@ intentHandlers['GetNightlifeDay'] = function(request,session,response,slots) {
 
 }
 
+intentHandlers['GetNextRestaurantIntent'] = function(request,session,response,slots) {
+
+  if(session.attributes.restaurantResults) {
+    response.cardTitle = `Other restaurants found: ${session.attributes.RestaurantItem}`;
+
+    response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+    response.cardContent = `${response.speechText}\n`;
+
+
+    session.attributes.restaurantResults.forEach(function(item) {
+      response.speechText += `Here are your other results. ${item[0]} is located at ${item[1]}. Food dishes include, ${item[3]}. `; 
+      response.cardContent += `'${item[0]}'\n`;
+    });
+  } 
+  else {
+    response.speechText  = `Wrong invocation of this intent. `;
+  }
+  response.shouldEndSession = true;
+  response.done();
+
+};
 
 intentHandlers['GetNextCuisineIntent'] = function(request,session,response,slots) {
 
@@ -512,18 +533,6 @@ intentHandlers['GetNextNightlifeIntent'] = function(request,session,response,slo
     session.attributes.nightlifeResults.forEach(function(item) {
       response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
       response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
-    })
-  } 
-  else if (session.attributes.musicResults) {
-    response.cardTitle = `Other restaurants found: ${session.attributes.NightlifeMusic}`;
-
-    response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
-    response.cardContent = `${response.speechText}\n`;
-
-
-    session.attributes.musicResults.forEach(function(item) {
-      response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
-      response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
     });
   } 
   else {
@@ -531,6 +540,50 @@ intentHandlers['GetNextNightlifeIntent'] = function(request,session,response,slo
   }
   response.shouldEndSession = true;
   response.done();
+
+};
+
+intentHandlers['GetNextMusicIntent'] = function(request,session,response,slots) {
+
+  if (session.attributes.musicResults) {
+  response.cardTitle = `Other restaurants found: ${session.attributes.NightlifeMusic}`;
+
+  response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+  response.cardContent = `${response.speechText}\n`;
+
+
+  session.attributes.musicResults.forEach(function(item) {
+    response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+    response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+  });
+} 
+else {
+  response.speechText  = `Wrong invocation of this intent. `;
+}
+response.shouldEndSession = true;
+response.done();
+
+};
+
+intentHandlers['GetNextDayIntent'] = function(request,session,response,slots) {
+
+  if (session.attributes.musicResults) {
+  response.cardTitle = `Other restaurants found: ${session.attributes.NightlifeDay}`;
+
+  response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+  response.cardContent = `${response.speechText}\n`;
+
+
+  session.attributes.nightlifeDayResults.forEach(function(item) {
+    response.speechText  += `${item[0]} is located at ${item[1]}. ${item[0]} is ${item[3]}. `; 
+    response.cardContent += `'${item[0]}' is located at '${item[1]}'. '${item[0]}' is '${item[3]}'. `;
+  });
+} 
+else {
+  response.speechText  = `Wrong invocation of this intent. `;
+}
+response.shouldEndSession = true;
+response.done();
 
 };
 
