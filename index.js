@@ -219,6 +219,7 @@ intentHandlers['HelloIntent'] = function(request,session,response,slots) {
 var MAX_RESPONSES = 1;
 var MAX_RESTAURANT_ITEMS = 10;
 var MAX_NIGHTLIFE_ITEMS = 5;
+var MAX_ENTERTAINMENT_ITEMS = 5;
 
 intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
   //Intent logic
@@ -477,6 +478,58 @@ intentHandlers['GetNightlifeDay'] = function(request,session,response,slots) {
 
 }
 
+intentHandlers['GetEntertainmentType'] = function(request,session,response,slots) {
+  //Intent logic
+  //slots.EntertainmentType
+
+  if(slots.EntertainmentType === undefined) {
+    response.speechText = 'You forgot to say the type of attraction you wish to visit. For example, you can say, recommend me a fun tour to visit, to discover more about Northern Ireland. ';
+    response.repromptText = 'For example, you can say, recommend me a tour. ';
+    response.shouldEndSession = false;
+    response.done();
+    return;
+  }
+
+  var entertainmentDb = require('./entertainment_db.json');
+  var eTypeResults = searchEntertainmentType(entertainmentDb,slots.EntertainmentType);
+
+  response.cardTitle = `Attraction results for: ${slots.EntertainmentType}`;
+  response.cardContent = '';
+  
+  if(eTypeResults.length==0) {
+    response.speechText = `Could not find any ${slots.EntertainmentType} attraction. Please try a different type of attraction. `;
+    response.cardContent += response.speechText;
+    response.shouldEndSession = true;
+    response.done();
+  } else {
+
+    eTypeResults.slice(0,MAX_RESPONSES).forEach( function(item) {
+      response.speechText  += `${item[0]} is located at ${item[1]}. Admission is ${item[2]} . ${item[4]}. `; 
+      response.cardContent += `'${item[0]}' is located at '${item[1]}'. Admission is '${item[2]}'.'${item[4]}.'`;
+    });
+
+
+    if(eTypeResults.length > MAX_RESPONSES) {
+      response.speechText += `There are more great '${slots.EntertainmentType}' attractions available. Say 'more attractions' to hear about them.  `; 
+      response.cardContent += `More attractions matched your search. Please say 'more attractions' to discover them. Otherwise, say stop if you don't want to hear about them. `; 
+      response.repromptText = `You can say 'more attractions' or stop.`; 
+      session.attributes.resultLength = eTypeResults.length;
+      session.attributes.EntertainmentType = slots.EntertainmentType;
+      session.attributes.eTypeResults = eTypeResults.slice(MAX_RESPONSES,MAX_ENTERTAINMENT_ITEMS);
+      response.shouldEndSession = false;
+      response.done();
+
+    } else {
+      response.shouldEndSession = true;
+      response.done();
+    }
+
+
+  }
+
+
+}
+
 intentHandlers['GetNextRestaurantIntent'] = function(request,session,response,slots) {
 
   if(session.attributes.restaurantResults) {
@@ -584,6 +637,28 @@ else {
 }
 response.shouldEndSession = true;
 response.done();
+
+};
+
+intentHandlers['GetNextEntertainmentTypeIntent'] = function(request,session,response,slots) {
+
+  if(session.attributes.cuisineResults) {
+    response.cardTitle = `Other attractions found: ${session.attributes.CuisineType}`;
+
+    response.speechText  = `Your search resulted in ${session.attributes.resultLength} results.`;
+    response.cardContent = `${response.speechText}\n`;
+
+
+    session.attributes.cuisineResults.forEach(function(item) {
+      response.speechText += `Here are your other results. ${item[0]} is located at ${item[1]}. Admission is ${item[2]} . ${item[4]}.`; 
+      response.cardContent += `'${item[0]}'\n`;
+    });
+  } 
+  else {
+    response.speechText  = `Wrong invocation of this intent. `;
+  }
+  response.shouldEndSession = true;
+  response.done();
 
 };
 
@@ -892,4 +967,62 @@ function searchNightlifeDay(nDb, NightlifeDay) {
   });
 
   return nightlifeDayFinalResult;
+}
+
+function searchEntertainmentType(eDb, EntertainmentType) {
+  EntertainmentType = EntertainmentType.toLowerCase();
+  var EntertainmentWords = EntertainmentType.split();
+  var regExps = []
+  var EntertainmentSearchResult = []
+
+
+  EntertainmentWords.forEach(function(eWord) {
+    regExps.push(new RegExp(`^${eWord}`));
+  });
+
+  eDb.forEach( function (item) {
+    var match = 1;
+    var entertainmentFullName = item[3]
+    var eWeight = 0;
+
+    EntertainmentWords.forEach(function(eWord) {
+      if(!entertainmentFullName.match(eWord)) {
+        match = 0;
+      }
+    });
+
+    if(match==0) {
+      return;
+    }
+
+    regExps.forEach(function(rExp) {
+      if(entertainmentFullName.match(rExp)) {
+        eWeight += 10;
+      }
+    });
+
+    if (entertainmentFullName.split(/\s+/).length == EntertainmentWords.length) {
+        eWeight += 10;
+    }
+
+
+    EntertainmentSearchResult.push([item, eWeight]);
+
+  });
+
+  
+  var entertainmentFinalResult = EntertainmentSearchResult.filter(function(x){return x[1]>=10});
+  if(entertainmentFinalResult.length == 0) {
+    entertainmentFinalResult = EntertainmentSearchResult;
+  } else {
+    entertainmentFinalResult.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+  }
+
+  entertainmentFinalResult = entertainmentFinalResult.map(function(x) {
+    return x[0]
+  });
+
+  return entertainmentFinalResult;
 }
