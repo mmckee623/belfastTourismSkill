@@ -240,7 +240,7 @@ intentHandlers['GetRestaurantInfo'] = function(request,session,response,slots) {
   response.cardContent = '';
   
   if(restaurantResults.length==0) {
-    response.speechText = `Could not find any ${slots.RestaurantItem} restaurants. Please try a different cuisine. `;
+    response.speechText = `Could not find any result or ${slots.RestaurantItem}. Please ask alexa about another restaurant. `;
     response.cardContent += response.speechText;
     response.shouldEndSession = true;
     response.done();
@@ -327,8 +327,8 @@ intentHandlers['GetNightlifeType'] = function(request,session,response,slots) {
   //slots.NightlifeType
 
   if(slots.NightlifeType === undefined) {
-    response.speechText = 'You forgot to say whether you want to go to a bar or nightclub. For example, you can say, recommend me a bar. ';
-    response.repromptText = 'For example, you can say, recommend me a bar. ';
+    response.speechText = 'You forgot to say whether you want to go to a bar or nightclub. For example, you can say, what is a good bar to go to. ';
+    response.repromptText = 'For example, you can say, what is a good bar to go to? ';
     response.shouldEndSession = false;
     response.done();
     return;
@@ -354,8 +354,8 @@ intentHandlers['GetNightlifeType'] = function(request,session,response,slots) {
 
 
     if(nightlifeResults.length > MAX_RESPONSES) {
-      response.speechText += `There are more '${slots.NightlifeType}' results. Say more information to hear about them.  `; 
-      response.cardContent += `More '${slots.NightlifeType}' matched your search. Please say more information to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
+      response.speechText += `There are more '${slots.NightlifeType}' results. Say more nightlife to hear about them.  `; 
+      response.cardContent += `More '${slots.NightlifeType}' matched your search. Please say more nightlife to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
       response.repromptText = `You can say more information or stop.`; 
       session.attributes.resultLength = nightlifeResults.length;
       session.attributes.NightlifeType = slots.NightlifeType;
@@ -406,9 +406,9 @@ intentHandlers['GetNightlifeMusic'] = function(request,session,response,slots) {
 
 
     if(musicResults.length > MAX_RESPONSES) {
-      response.speechText += `There are more '${slots.NightlifeMusic}' results. Say more information to hear about them.  `; 
-      response.cardContent += `More '${slots.NightlifeMusic}' matched your search. Please say more information to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
-      response.repromptText = `You can say more information or stop.`; 
+      response.speechText += `There are more '${slots.NightlifeMusic}' results. Say more music to hear about them.  `; 
+      response.cardContent += `More '${slots.NightlifeMusic}' matched your search. Please say more music to discover more great nightlife destinations. Otherwise, say stop if you don't want to hear about them. `; 
+      response.repromptText = `You can say more music or stop.`; 
       session.attributes.resultLength = musicResults.length;
       session.attributes.NightlifeMusic = slots.NightlifeMusic;
       session.attributes.musicResults = musicResults.slice(MAX_RESPONSES,MAX_NIGHTLIFE_ITEMS);
